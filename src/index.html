@@ -5,6 +5,7 @@
     <title>cartProject</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <!-- <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.min.css"> -->
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
@@ -168,24 +169,78 @@
           </div>
         </div>
       </div>
+
+
+      <div class="col-md-12 main__filter">
+        <div class="row">
+          <div class="col-md-2"><p><span class="fa fa-sort" aria-hidden="true"></span>Filter by Class:</p></div>
+          <div class="col-md-2"><p><span class="fa fa-sort" aria-hidden="true"></span>Filter by Wins:</p></div>
+          <div class="col-md-2"></div>
+          <div class="col-md-2"></div>
+          <div class="col-md-2"><p><span class="fa fa-sort" aria-hidden="true"></span>Filter by HA score:</p></div>
+          <div class="col-md-2"></div>
+        </div>
+        <div class="row">
+          <form>                                    <!--  formularz do wyszukiwania -->
+            <div class="col-md-2">                     
+              <select ng-model="testName">
+                <option value="">None</option>
+                <option value="Druid">Druid</option>
+                <option value="Hunter">Hunter</option>
+                <option value="Mage">Mage</option>
+                <option value="Paladin">Paladin</option>
+                <option value="Priest">Priest</option>
+                <option value="Rogue">Rogue</option>
+                <option value="Shaman">Shaman</option>
+                <option value="Warlock">Warlock</option>
+                <option value="Warrior">Warrior</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <select ng-model="testWins">
+                <option value="">None</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+              </select>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-2">                    
+              <input type="text" ng-model="testScore" placeholder="HA score">
+            </div>
+            <div class="col-md-2"></div>
+          </form>
+        </div>
+      </div>
+
       <div class="row">
         <div class="col-md-12">
           <table class="table table-hover aTable">
             <thead class="aThead">
               <tr class="aTr">
-                <th>CLASS</th>
-                <th>WINS</th>
+                <th ng-click="orderByMe('char')">CLASS</th>
+                <th ng-click="orderByMe('wins')">WINS</th>
                 <th>PACK1</th>
                 <th>PACK2</th>
                 <th>PACK3</th>
                 <th>PACK4</th>
                 <th>PACK5</th>
-                <th>HA SCORE</th>
+                <th ng-click="orderByMe('score')">HA SCORE</th>
                 <th>btn</th>
               </tr>
             </thead>
             <tbody class="aTbody"> 
-              <tr ng-repeat="product in cart.listOfProducts track by $index" class="aTr">
+              <tr ng-repeat="product in cart.listOfProducts | filter: { char: testName, wins: testWins, score: testScore} | orderBy:myOrderBy track by $index " class="aTr">
                 <td>{{product.char}}</td>
                 <td>{{product.wins}}</td>
                 <td>{{product.value1}}{{product.display1}}</td>
@@ -195,7 +250,7 @@
                 <td>{{product.value5}}{{product.display5}}</td>
                 <td>{{product.score}}</td>
                 <td>
-                  <button class="btn-danger" ng-click="removeElement($index)">X</button>
+                  <button class="btn-danger" ng-click="removeElement(cart.listOfProducts.indexOf(product))">X</button>
                 </td>
               </tr>
             </tbody>
@@ -212,9 +267,9 @@
           <p>Zagrane: {{ cart.overAllGames() }}</p>
           <p>Przegrane: {{ cart.overAllLostGames() }}</p>
           <p>Srednia: {{ cart.overAllAvg() }}</p>
-          <p>zysk/strata: {{ cart.overAllWinLossRatio() }}</p>
+          <p>zysk/strata: {{ cart.overAllWinLossRatio() }} G</p>
           <p>Niesplacone: {{ cart.overAllBadGames() }}</p>
-          <p>zysk/strata w stodsunku do zwyklych gier: {{ cart.overAllGrind() }}</p>
+          <p>zysk/strata w stodsunku do zwyklych gier: {{ cart.overAllGrind() }} G</p>
           <p>Szacunkowy czas gry: {{ cart.overAllTimePlayed() }}</p>
         </div>
         <div class="col-md-6">

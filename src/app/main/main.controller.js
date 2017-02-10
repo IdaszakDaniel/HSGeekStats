@@ -15,6 +15,7 @@
     var reset = function() {
       $scope.productChar = "";
       $scope.productWins = 0;
+      $scope.productScore = 0;
       $scope.productPack1 = "";
       $scope.productPack2 = "";
       $scope.productPack3 = "";
@@ -69,6 +70,40 @@
       $scope.cart.removeElement(id);
     }
 
+    var winsSorted=false;
+    var classSorted=false;
+    var scoreSorted=false;
+    $scope.myOrderBy = "";
+
+    $scope.orderByMe = function(x) {
+      if(x=="char") {
+        if(classSorted==true){
+          $scope.myOrderBy = "-"+x;
+          classSorted=false;
+        } else {
+          $scope.myOrderBy = x;
+            classSorted=true;
+        }
+      }
+      if(x=="wins"){
+        if(winsSorted==true){
+          $scope.myOrderBy = "-"+x;
+          winsSorted=false;
+        } else {
+          $scope.myOrderBy = x;
+          winsSorted=true;
+        }
+      }
+      if(x=="score"){
+        if(scoreSorted==true){
+          $scope.myOrderBy = "-"+x;
+          scoreSorted=false;
+        } else {
+          $scope.myOrderBy = x;
+          scoreSorted=true;
+        }
+      }
+    };
   }
 
 })();
