@@ -95,6 +95,78 @@
         return this.sumOfTimePlayed.toFixed(2);
       };
 
+      this.overAllHunter = function() {
+        this.charHunter = 0;
+        this.listOfProducts.forEach(function(product) {
+          if(product.getChar() == "Hunter") this.charHunter +=1;
+        }, this);
+        return this.charHunter;
+      };
+
+      this.overAllRogue = function() {
+        this.charRogue = 0;
+        this.listOfProducts.forEach(function(product) {
+          if(product.getChar() == "Rogue") this.charRogue +=1;
+        }, this);
+        return this.charRogue;
+      };
+
+      this.overAllWarrior = function() {
+        this.charWarrior = 0;
+        this.listOfProducts.forEach(function(product) {
+          if(product.getChar() == "Warrior") this.charWarrior +=1;
+        }, this);
+        return this.charWarrior;
+      };
+
+      this.overAllWarlock = function() {
+        this.charWarlock = 0;
+        this.listOfProducts.forEach(function(product) {
+          if(product.getChar() == "Warlock") this.charWarlock +=1;
+        }, this);
+        return this.charWarlock;
+      };
+
+      this.overAllDruid = function() {
+        this.charDruid = 0;
+        this.listOfProducts.forEach(function(product) {
+          if(product.getChar() == "Druid") this.charDruid +=1;
+        }, this);
+        return this.charDruid;
+      };
+
+      this.overAllMage = function() {
+        this.charMage = 0;
+        this.listOfProducts.forEach(function(product) {
+          if(product.getChar() == "Mage") this.charMage +=1;
+        }, this);
+        return this.charMage;
+      };
+
+      this.overAllShaman = function() {
+        this.charShaman = 0;
+        this.listOfProducts.forEach(function(product) {
+          if(product.getChar() == "Shaman") this.charShaman +=1;
+        }, this);
+        return this.charShaman;
+      };
+
+      this.overAllPaladin = function() {
+        this.charPaladin = 0;
+        this.listOfProducts.forEach(function(product) {
+          if(product.getChar() == "Paladin") this.charPaladin +=1;
+        }, this);
+        return this.charPaladin;
+      };
+
+      this.overAllPriest = function() {
+        this.charPriest = 0;
+        this.listOfProducts.forEach(function(product) {
+          if(product.getChar() == "Priest") this.charPriest +=1;
+        }, this);
+        return this.charPriest;
+      };
+
       this.addProduct = function(product) {
         this.listOfProducts.push(product);
       };

@@ -154,6 +154,10 @@
         return this.wins;
       };
 
+      this.getChar = function() {
+        return this.char;
+      };
+
       this.getGames = function() {
         if(this.wins == 12) {
           return this.wins;
