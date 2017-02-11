@@ -27,7 +27,46 @@
 
     <div class="container" ng-controller="MainController as main">
 
-      
+      <div class="row stats">
+        <div class="col-md-6">
+          <h3>Statystyki</h3>
+          <div class="row">
+            <div class="col-md-6">
+              <p>Ilość aren: {{ cart.overAll() }} </p>
+              <p>Suma gold: {{ cart.overAllGold() }}</p>
+              <p>Suma dust: {{ cart.overAllDust() }}</p>
+              <p>Wygrane: {{ cart.overAllWins() }}</p>
+              <p>Zagrane: {{ cart.overAllGames() }}</p>
+              <p>Przegrane: {{ cart.overAllLostGames() }}</p>
+            </div>
+            <div class="col-md-6">
+              <p>Srednia: {{ cart.overAllAvg() }}</p>
+              <p>zysk/strata: {{ cart.overAllWinLossRatio() }} G</p>
+              <p>Niesplacone: {{ cart.overAllBadGames() }}</p>
+              <p>zysk/strata grind: {{ cart.overAllGrind() }} G</p>
+              <p>Szacunkowy czas gry: {{ cart.overAllTimePlayed() }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 classes">
+          <h3>Klasy</h3>
+          <div class="row">
+            <div class="col-md-6">
+              <p><img src="img/hunter.png" alt="hunter" width="256" height="256">Hunter: {{ cart.overAllHunter() }} </p>
+              <p><img src="img/warlock.png" alt="warlock" width="256" height="256">Warlock: {{ cart.overAllWarlock() }} </p>
+              <p><img src="img/warrior.png" alt="warrior" width="256" height="256">Warrior: {{ cart.overAllWarrior() }} </p>
+              <p><img src="img/rogue.png" alt="rogue" width="256" height="256">Rogue: {{ cart.overAllRogue() }} </p>
+              <p><img src="img/druid.png" alt="druid" width="256" height="256">Druid: {{ cart.overAllHunter() }} </p>
+            </div>
+            <div class="col-md-6">
+              <p><img src="img/shaman.png" alt="shaman" width="256" height="256">Shaman: {{ cart.overAllShaman() }} </p>
+              <p><img src="img/mage.png" alt="mage" width="256" height="256">Mage: {{ cart.overAllMage() }} </p>
+              <p><img src="img/paladin.png" alt="paladin" width="256" height="256">Paladin: {{ cart.overAllPaladin() }} </p>
+              <p><img src="img/priest.png" alt="priest" width="256" height="256">Priest: {{ cart.overAllPriest() }} </p>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="row">
         <div class="col-md-12">
           <div class="row input__container">
@@ -255,34 +294,6 @@
               </tr>
             </tbody>
           </table>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <h3>Statystyki</h3>
-          <p>Ilość aren: {{ cart.overAll() }} </p>
-          <p>Suma gold: {{ cart.overAllGold() }}</p>
-          <p>Suma dust: {{ cart.overAllDust() }}</p>
-          <p>Wygrane: {{ cart.overAllWins() }}</p>
-          <p>Zagrane: {{ cart.overAllGames() }}</p>
-          <p>Przegrane: {{ cart.overAllLostGames() }}</p>
-          <p>Srednia: {{ cart.overAllAvg() }}</p>
-          <p>zysk/strata: {{ cart.overAllWinLossRatio() }} G</p>
-          <p>Niesplacone: {{ cart.overAllBadGames() }}</p>
-          <p>zysk/strata w stodsunku do zwyklych gier: {{ cart.overAllGrind() }} G</p>
-          <p>Szacunkowy czas gry: {{ cart.overAllTimePlayed() }}</p>
-        </div>
-        <div class="col-md-6">
-          <h3>Klasy:</h3>
-          <p>Hunter: {{ cart.overAllHunter() }} </p>
-          <p>Warlock: {{ cart.overAllWarlock() }} </p>
-          <p>Warrior: {{ cart.overAllWarrior() }} </p>
-          <p>Rogue: {{ cart.overAllRogue() }} </p>
-          <p>Druid: {{ cart.overAllHunter() }} </p>
-          <p>Shaman: {{ cart.overAllShaman() }} </p>
-          <p>Mage: {{ cart.overAllMage() }} </p>
-          <p>Paladin: {{ cart.overAllPaladin() }} </p>
-          <p>Priest: {{ cart.overAllPriest() }} </p>
         </div>
       </div>
     </div>
