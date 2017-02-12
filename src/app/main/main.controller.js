@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($scope, CartModel, ProductModel) {
+  function MainController($scope, CartModel, ProductModel, $http) {
 
     $scope.typyNagrod = ["brak", "złoto", "proszek", "karta", "paczka"];
     $scope.typyKart = ["złota", "fioletowa", "pomarań", "szara"];
@@ -65,6 +65,34 @@
       $scope.product = new ProductModel();
       reset();
     }
+
+    $http.get('baza.json')
+      .success(function(data) {
+        data.list.forEach(function(answer) {
+          $scope.product.setChar(answer.char);
+          $scope.product.setWins(answer.wins);
+          $scope.product.setPack1(answer.pack1);
+          $scope.product.setPack2(answer.pack2);
+          $scope.product.setPack3(answer.pack3);
+          $scope.product.setPack4(answer.pack4);
+          $scope.product.setPack5(answer.pack5);
+          $scope.product.setScore(answer.score);
+          $scope.product.setValue1(answer.value1);
+          $scope.product.setValue2(answer.value2);
+          $scope.product.setValue3(answer.value3);
+          $scope.product.setValue4(answer.value4);
+          $scope.product.setValue5(answer.value5);
+          $scope.product.setDisplay1(answer.pack1);
+          $scope.product.setDisplay2(answer.pack2);
+          $scope.product.setDisplay3(answer.pack3);
+          $scope.product.setDisplay4(answer.pack4);
+          $scope.product.setDisplay5(answer.pack5);
+          
+          $scope.cart.addProduct($scope.product);
+
+          console.log(JSON.stringify($scope.cart, null, 2));
+        });
+      }); 
 
     $scope.removeElement = function(id) {
       $scope.cart.removeElement(id);
