@@ -10,7 +10,6 @@
 
     $scope.typyNagrod = ["brak", "złoto", "proszek", "karta", "paczka"];
     $scope.typyKart = ["złota", "fioletowa", "pomarań", "szara"];
-    $scope.packsNum = ["pack1","pack2","pack3","pack4","pack5"];
 
     var reset = function() {
       $scope.productChar = "";
@@ -40,23 +39,12 @@
 
       $scope.product.setChar($scope.productChar);
       $scope.product.setWins($scope.productWins);
-      $scope.product.setPack1($scope.productPack1);
-      $scope.product.setPack2($scope.productPack2);
-      $scope.product.setPack3($scope.productPack3);
-      $scope.product.setPack4($scope.productPack4);
-      $scope.product.setPack5($scope.productPack5);
+      $scope.product.setPack1($scope.productPack1, $scope.productValue1);
+      $scope.product.setPack2($scope.productPack2, $scope.productValue2);
+      $scope.product.setPack3($scope.productPack3, $scope.productValue3);
+      $scope.product.setPack4($scope.productPack4, $scope.productValue4);
+      $scope.product.setPack5($scope.productPack5, $scope.productValue5);
       $scope.product.setScore($scope.productScore);
-      $scope.product.setValue1($scope.productValue1);
-      $scope.product.setValue2($scope.productValue2);
-      $scope.product.setValue3($scope.productValue3);
-      $scope.product.setValue4($scope.productValue4);
-      $scope.product.setValue5($scope.productValue5);
-      $scope.product.setDisplay1($scope.productPack1);
-      $scope.product.setDisplay2($scope.productPack2);
-      $scope.product.setDisplay3($scope.productPack3);
-      $scope.product.setDisplay4($scope.productPack4);
-      $scope.product.setDisplay5($scope.productPack5);
-
 
       $scope.cart.addProduct($scope.product);
 
@@ -71,26 +59,18 @@
         data.list.forEach(function(answer) {
           $scope.product.setChar(answer.char);
           $scope.product.setWins(answer.wins);
-          $scope.product.setPack1(answer.pack1);
-          $scope.product.setPack2(answer.pack2);
-          $scope.product.setPack3(answer.pack3);
-          $scope.product.setPack4(answer.pack4);
-          $scope.product.setPack5(answer.pack5);
+          $scope.product.setPack1(answer.pack1, answer.value1);
+          $scope.product.setPack2(answer.pack2, answer.value2);
+          $scope.product.setPack3(answer.pack3, answer.value3);
+          $scope.product.setPack4(answer.pack4, answer.value4);
+          $scope.product.setPack5(answer.pack5, answer.value5);
           $scope.product.setScore(answer.score);
-          $scope.product.setValue1(answer.value1);
-          $scope.product.setValue2(answer.value2);
-          $scope.product.setValue3(answer.value3);
-          $scope.product.setValue4(answer.value4);
-          $scope.product.setValue5(answer.value5);
-          $scope.product.setDisplay1(answer.pack1);
-          $scope.product.setDisplay2(answer.pack2);
-          $scope.product.setDisplay3(answer.pack3);
-          $scope.product.setDisplay4(answer.pack4);
-          $scope.product.setDisplay5(answer.pack5);
           
           $scope.cart.addProduct($scope.product);
+          $scope.product = new ProductModel();
+          reset();
 
-          console.log(JSON.stringify($scope.cart, null, 2));
+          //console.log(JSON.stringify($scope.cart, null, 2));
         });
       }); 
 

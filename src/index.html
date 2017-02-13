@@ -147,7 +147,7 @@
                   <div ng-show="productPack1==3" class="form__input">
                     <select required name="nagroda1" ng-model="productValue1">
                       <option value="" disabled selected hidden>card colour</option>
-                      <option ng-repeat="name in typyKart track by $index" value="{{$index}}">{{name}}</option>
+                      <option ng-repeat="name in typyKart track by $index" string-to-number value="{{$index}}">{{name}}</option>
                     </select>
                   </div>
                 </div>
