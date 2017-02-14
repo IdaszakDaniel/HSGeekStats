@@ -95,7 +95,7 @@
         return this.sumOfTimePlayed.toFixed(2);
       };
 
-      this.overAllHunter = function() {
+     this.overAllHunter = function() {
         this.charHunter = 0;
         this.listOfProducts.forEach(function(product) {
           if(product.getChar() == "Hunter") this.charHunter +=1;

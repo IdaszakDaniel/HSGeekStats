@@ -30,7 +30,22 @@
       "value4": 0,
       "value5": 0
     },
-	    {
+	 {
+      "char": "Rogue",
+      "wins": 7,
+      "pack1": "1",
+      "pack2": "2",
+      "pack3": "3",
+      "pack4": "0",
+      "pack5": "0",
+      "score": "45",
+      "value1": 50,
+      "value2": 67,
+      "value3": "1",
+      "value4": 0,
+      "value5": 0
+    },
+	{
       "char": "Mage",
       "wins": 3,
       "pack1": "1",
