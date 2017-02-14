@@ -5,13 +5,13 @@
     <title>cartProject</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <!-- <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.min.css"> -->
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="../bower_components/angular-toastr/dist/angular-toastr.css" />
     <link rel="stylesheet" href="../bower_components/animate.css/animate.css" />
+    <link rel="stylesheet" href="../bower_components/components-font-awesome/css/font-awesome.css" />
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -213,11 +213,11 @@
 
       <div class="col-md-12 main__filter">
         <div class="row">
-          <div class="col-md-2"><p><span class="fa fa-sort" aria-hidden="true"></span>Filter by Class:</p></div>
-          <div class="col-md-2"><p><span class="fa fa-sort" aria-hidden="true"></span>Filter by Wins:</p></div>
+          <div class="col-md-2"><p><span class="fa fa-filter" aria-hidden="true"></span> Filter by Class:</p></div>
+          <div class="col-md-2"><p><span class="fa fa-filter" aria-hidden="true"></span> Filter by Wins:</p></div>
           <div class="col-md-2"></div>
           <div class="col-md-2"></div>
-          <div class="col-md-2"><p><span class="fa fa-sort" aria-hidden="true"></span>Filter by HA score:</p></div>
+          <div class="col-md-2"><p><span class="fa fa-filter" aria-hidden="true"></span> Filter by HA score:</p></div>
           <div class="col-md-2"></div>
         </div>
         <div class="row">
@@ -268,14 +268,14 @@
           <table class="table table-hover aTable">
             <thead class="aThead">
               <tr class="aTr">
-                <th ng-click="orderByMe('char')">CLASS</th>
-                <th ng-click="orderByMe('wins')">WINS</th>
+                <th ng-click="orderByMe('char')">CLASS <span class="fa fa-sort" aria-hidden="true"></span></th>
+                <th ng-click="orderByMe('wins')">WINS <span class="fa fa-sort" aria-hidden="true"></span></th>
                 <th>PACK1</th>
                 <th>PACK2</th>
                 <th>PACK3</th>
                 <th>PACK4</th>
                 <th>PACK5</th>
-                <th ng-click="orderByMe('score')">HA SCORE</th>
+                <th ng-click="orderByMe('score')">HA SCORE <span class="fa fa-sort" aria-hidden="true"></span></th>
                 <th>btn</th>
               </tr>
             </thead>
@@ -298,7 +298,6 @@
         </div>
       </div>
     </div>
-
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="../bower_components/jquery/dist/jquery.js"></script>
@@ -306,6 +305,8 @@
     <script src="../bower_components/angular/angular.js"></script>
     <script src="../bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
     <script src="../bower_components/moment/moment.js"></script>
+    <script src="../bower_components/chart.js/dist/Chart.js"></script>
+    <script src="../bower_components/angular-chart.js/dist/angular-chart.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
