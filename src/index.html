@@ -51,17 +51,17 @@
           <h3>Klasy</h3>
           <div class="row">
             <div class="col-md-6">
-              <p><img src="img/hunter.png" alt="hunter" width="256" height="256">Hunter: {{ cart.overAllHunter() }} </p>
-              <p><img src="img/warlock.png" alt="warlock" width="256" height="256">Warlock: {{ cart.overAllWarlock() }} </p>
-              <p><img src="img/warrior.png" alt="warrior" width="256" height="256">Warrior: {{ cart.overAllWarrior() }} </p>
-              <p><img src="img/rogue.png" alt="rogue" width="256" height="256">Rogue: {{ cart.overAllRogue() }} </p>
-              <p><img src="img/druid.png" alt="druid" width="256" height="256">Druid: {{ cart.overAllHunter() }} </p>
+              <p><img src="img/hunter.png" alt="hunter" width="256" height="256">Hunter: {{ cart.overAllClasses(0) }} </p>
+              <p><img src="img/warlock.png" alt="warlock" width="256" height="256">Warlock: {{ cart.overAllClasses(1) }} </p>
+              <p><img src="img/warrior.png" alt="warrior" width="256" height="256">Warrior: {{ cart.overAllClasses(2) }} </p>
+              <p><img src="img/rogue.png" alt="rogue" width="256" height="256">Rogue: {{ cart.overAllClasses(3)}} </p>
+              <p><img src="img/druid.png" alt="druid" width="256" height="256">Druid: {{ cart.overAllClasses(4) }} </p>
             </div>
             <div class="col-md-6">
-              <p><img src="img/shaman.png" alt="shaman" width="256" height="256">Shaman: {{ cart.overAllShaman() }} </p>
-              <p><img src="img/mage.png" alt="mage" width="256" height="256">Mage: {{ cart.overAllMage() }} </p>
-              <p><img src="img/paladin.png" alt="paladin" width="256" height="256">Paladin: {{ cart.overAllPaladin() }} </p>
-              <p><img src="img/priest.png" alt="priest" width="256" height="256">Priest: {{ cart.overAllPriest() }} </p>
+              <p><img src="img/shaman.png" alt="shaman" width="256" height="256">Shaman: {{ cart.overAllClasses(5) }} </p>
+              <p><img src="img/mage.png" alt="mage" width="256" height="256">Mage: {{ cart.overAllClasses(6)}} </p>
+              <p><img src="img/paladin.png" alt="paladin" width="256" height="256">Paladin: {{ cart.overAllClasses(7) }} </p>
+              <p><img src="img/priest.png" alt="priest" width="256" height="256">Priest: {{ cart.overAllClasses(8) }} </p>
             </div>
           </div>
         </div>
