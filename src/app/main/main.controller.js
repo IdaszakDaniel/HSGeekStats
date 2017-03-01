@@ -10,6 +10,7 @@
 
     $scope.typyNagrod = ["brak", "złoto", "proszek", "karta", "paczka"];
     $scope.typyKart = ["złota", "fioletowa", "pomarań", "szara"];
+    $scope.labels = ["Hunter", "Warlock", "Warrior", "Rogue", "Druid", "Shaman", "Mage", "Paladin", "Priest"];
 
     var reset = function() {
       $scope.productChar = "";
@@ -52,51 +53,33 @@
 
       $scope.product = new ProductModel();
       reset();
+      refreshBarChart();
+
     }
+    var promiseAnswers = GetJson.getData();
 
-/*    $http.get('baza.json')
-      .success(function(data) {
-        data.list.forEach(function(answer) {
-          $scope.product.setChar(answer.char);
-          $scope.product.setWins(answer.wins);
-          $scope.product.setPack1(answer.pack1, answer.value1);
-          $scope.product.setPack2(answer.pack2, answer.value2);
-          $scope.product.setPack3(answer.pack3, answer.value3);
-          $scope.product.setPack4(answer.pack4, answer.value4);
-          $scope.product.setPack5(answer.pack5, answer.value5);
-          $scope.product.setScore(answer.score);
-          
-          $scope.cart.addProduct($scope.product);
-          $scope.product = new ProductModel();
-          reset();
-
-          //console.log(JSON.stringify($scope.cart, null, 2));
-        });
-      }); */
-
-      var promiseAnswers = GetJson.getData();
-
-      promiseAnswers.then(function(data){
-        data.list.forEach(function(answer) {
-          $scope.product.setChar(answer.char);
-          $scope.product.setWins(answer.wins);
-          $scope.product.setPack1(answer.pack1, answer.value1);
-          $scope.product.setPack2(answer.pack2, answer.value2);
-          $scope.product.setPack3(answer.pack3, answer.value3);
-          $scope.product.setPack4(answer.pack4, answer.value4);
-          $scope.product.setPack5(answer.pack5, answer.value5);
-          $scope.product.setScore(answer.score);
-          
-          $scope.cart.addProduct($scope.product);
-          $scope.product = new ProductModel();
-          reset();
-
-          //console.log(JSON.stringify($scope.cart, null, 2));
-        });
+    promiseAnswers.then(function(data){
+      data.list.forEach(function(answer) {
+        $scope.product.setChar(answer.char);
+        $scope.product.setWins(answer.wins);
+        $scope.product.setPack1(answer.pack1, answer.value1);
+        $scope.product.setPack2(answer.pack2, answer.value2);
+        $scope.product.setPack3(answer.pack3, answer.value3);
+        $scope.product.setPack4(answer.pack4, answer.value4);
+        $scope.product.setPack5(answer.pack5, answer.value5);
+        $scope.product.setScore(answer.score);
+        
+        $scope.cart.addProduct($scope.product);
+        $scope.product = new ProductModel();
+        reset();
+        refreshBarChart();
+        //console.log(JSON.stringify($scope.cart, null, 2));
       });
+    });
 
     $scope.removeElement = function(id) {
       $scope.cart.removeElement(id);
+      refreshBarChart();
     }
 
     var winsSorted=false;
@@ -133,6 +116,15 @@
         }
       }
     };
-  }
 
+    var refreshBarChart = function() {
+      $scope.data = [
+        [$scope.cart.overAllClasses(0), $scope.cart.overAllClasses(1),
+        $scope.cart.overAllClasses(2), $scope.cart.overAllClasses(3),
+        $scope.cart.overAllClasses(4), $scope.cart.overAllClasses(5),
+        $scope.cart.overAllClasses(6), $scope.cart.overAllClasses(7),
+        $scope.cart.overAllClasses(8)]
+      ];
+    };
+  }
 })();

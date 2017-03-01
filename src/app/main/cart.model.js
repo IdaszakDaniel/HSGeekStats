@@ -117,7 +117,6 @@ this.overAllClasses = function(cell) {
       };
 
       this.removeElement = function(id) {
-        console.log("cut:" + id);
         this.listOfProducts.splice(id, 1);
       }
 

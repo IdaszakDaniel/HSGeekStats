@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('cartProject', ['toastr']);
+    .module('cartProject', ['chart.js', 'toastr']);
 
 })();
