@@ -8,7 +8,7 @@
   /** @ngInject */
   function ProductModelFactory() {
 
-    var ProductModel = function(char, wins, pack1, pack2, pack3, pack4, pack5, score, value1, value2, value3, value4, value5) {
+    var ProductModel = function(char, wins, pack1, pack2, pack3, pack4, pack5, score, value1, value2, value3, value4, value5, time) {
 
       this.char = char || "";
       this.wins = wins || 0;
@@ -28,6 +28,7 @@
       this.display3 = pack3 || "";
       this.display4 = pack4 || "";
       this.display5 = pack5 || "";
+      this.time = time || "";
 
       this.display = function(x){
         if(x == "0") return "--";
@@ -87,6 +88,10 @@
 
       this.setScore = function(score) {
         this.score = score;
+      };
+
+      this.setTime = function(time) {
+        this.time = time;
       };
 
       this.getGold = function() {

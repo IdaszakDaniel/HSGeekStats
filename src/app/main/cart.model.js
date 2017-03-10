@@ -95,22 +95,18 @@
         return this.sumOfTimePlayed.toFixed(2);
       };
 
-
-
-
-
-this.overAllClasses = function(cell) {
-  this.character = ["Hunter","Warlock","Warrior","Rogue","Druid","Shaman","Mage","Paladin","Priest"];
-  this.charAmount = [0,0,0,0,0,0,0,0,0];
-  this.listOfProducts.forEach(function(product) {
-    this.character.forEach(function(a,index){
-      if(product.getChar() == a ){
-        this.charAmount[index] +=1;
-      }
-    }, this); 
-  }, this);
-  return this.charAmount[cell];
-};
+      this.overAllClasses = function(cell) {
+        this.character = ["Hunter","Warlock","Warrior","Rogue","Druid","Shaman","Mage","Paladin","Priest"];
+        this.charAmount = [0,0,0,0,0,0,0,0,0];
+        this.listOfProducts.forEach(function(product) {
+          this.character.forEach(function(a,index){
+            if(product.getChar() == a ){
+              this.charAmount[index] +=1;
+            }
+          }, this); 
+        }, this);
+        return this.charAmount[cell];
+      };
 
       this.addProduct = function(product) {
         this.listOfProducts.push(product);

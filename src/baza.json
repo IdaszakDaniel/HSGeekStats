@@ -13,7 +13,8 @@
       "value1": 100,
       "value2": 50,
       "value3": "0",
-      "value4": "1"
+      "value4": "1",
+      "time": "March 8th 2017, 11:00:00 pm"
     },
     {
       "char": "Druid",
@@ -28,7 +29,8 @@
       "value2": 67,
       "value3": "1",
       "value4": 0,
-      "value5": 0
+      "value5": 0,
+      "time": "March 8th 2017, 11:00:00 pm"
     },
 	 {
       "char": "Rogue",
@@ -43,7 +45,8 @@
       "value2": 67,
       "value3": "1",
       "value4": 0,
-      "value5": 0
+      "value5": 0,
+      "time": "March 8th 2017, 11:00:00 pm"
     },
 	{
       "char": "Mage",
@@ -58,7 +61,8 @@
       "value2": 67,
       "value3": "1",
       "value4": 0,
-      "value5": 0
+      "value5": 0,
+      "time": "March 8th 2017, 11:00:00 pm"
     }
   ] }
   

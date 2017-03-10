@@ -46,6 +46,8 @@
       $scope.product.setPack4($scope.productPack4, $scope.productValue4);
       $scope.product.setPack5($scope.productPack5, $scope.productValue5);
       $scope.product.setScore($scope.productScore);
+      $scope.product.setTime(moment().format('MMMM Do YYYY, h:mm:ss a'));
+
 
       $scope.cart.addProduct($scope.product);
 
@@ -68,6 +70,7 @@
         $scope.product.setPack4(answer.pack4, answer.value4);
         $scope.product.setPack5(answer.pack5, answer.value5);
         $scope.product.setScore(answer.score);
+        $scope.product.setTime(answer.time);
         
         $scope.cart.addProduct($scope.product);
         $scope.product = new ProductModel();
