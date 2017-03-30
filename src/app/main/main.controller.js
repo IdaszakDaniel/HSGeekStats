@@ -6,11 +6,10 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($scope, CartModel, ProductModel, $http, GetJson) {
+  function MainController($scope, CartModel, ProductModel, $http, GetJson, $rootScope) {
 
     $scope.typyNagrod = ["brak", "złoto", "proszek", "karta", "paczka"];
     $scope.typyKart = ["złota", "fioletowa", "pomarań", "szara"];
-    $scope.labels = ["Hunter", "Warlock", "Warrior", "Rogue", "Druid", "Shaman", "Mage", "Paladin", "Priest"];
 
     var reset = function() {
       $scope.productChar = "";
@@ -46,7 +45,7 @@
       $scope.product.setPack4($scope.productPack4, $scope.productValue4);
       $scope.product.setPack5($scope.productPack5, $scope.productValue5);
       $scope.product.setScore($scope.productScore);
-      $scope.product.setTime(moment().format('MMMM Do YYYY, h:mm:ss a'));
+      $scope.product.setTime(moment().format('MMMM Do YYYY'));//, h:mm:ss a'));
 
 
       $scope.cart.addProduct($scope.product);
@@ -121,13 +120,15 @@
     };
 
     var refreshBarChart = function() {
-      $scope.data = [
+      var data = [
         [$scope.cart.overAllClasses(0), $scope.cart.overAllClasses(1),
         $scope.cart.overAllClasses(2), $scope.cart.overAllClasses(3),
         $scope.cart.overAllClasses(4), $scope.cart.overAllClasses(5),
         $scope.cart.overAllClasses(6), $scope.cart.overAllClasses(7),
         $scope.cart.overAllClasses(8)]
       ];
+      $rootScope.$broadcast("sendData", data);
+      $rootScope.$broadcast("sendTime", cart.overAllTime());
     };
   }
 })();

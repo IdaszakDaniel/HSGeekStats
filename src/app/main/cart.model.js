@@ -62,6 +62,21 @@
         return this.sumOfLostGames;
       };
 
+      this.overAllTime = function() {
+        this.time = [];//this.listOfProducts[0].getTime()];
+        //console.log("czas",this.listOfProducts[0]);
+        this.listOfProducts.forEach(function(product) {
+          //console.log(product.getTime());
+          //this.time.forEach(function(el){
+           // if(el != product.getTime());
+            //{
+              this.time.push(product.getTime());
+            //}
+          //});
+        }, this);
+        return this.time;
+      };
+
       this.overAllAvg = function() {
         if(this.sumOfGames != 0) {
           return this.sumOfWins/this.sumOfGames;

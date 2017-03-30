@@ -106,6 +106,10 @@
         return this.wins;
       };
 
+      this.getTime = function() {
+        return this.time;
+      };
+
       this.getChar = function() {
         return this.char;
       };
