@@ -305,6 +305,16 @@
       </div>
     </div>
   </div>
+  <div class="container" ng-controller="LineChartController as bar">
+    <div class="row">
+      <div class="col-md-12">
+      <canvas id="line" class="chart chart-line" chart-data="data"
+      chart-labels="labels" chart-series="series" chart-options="options"
+      chart-dataset-override="datasetOverride" chart-click="onClick">
+      </canvas>
+      </div>
+    </div>
+  </div>
 
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->
@@ -323,6 +333,7 @@
     <script src="app/index.module.js"></script>
     <script src="app/main/product.model.js"></script>
     <script src="app/main/main.controller.js"></script>
+    <script src="app/main/lineChart.controller.js"></script>
     <script src="app/main/getJsonService.js"></script>
     <script src="app/main/cart.model.js"></script>
     <script src="app/main/barChart.controller.js"></script>
