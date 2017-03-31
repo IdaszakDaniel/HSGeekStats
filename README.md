@@ -1,4 +1,7 @@
 # HSGeekStats
 Hearthstone arena stats app
 
-<code>gulp serve</code> to run app
+<b>to install dependencies:</b></br>
+<code>npm install && bower install</code></br>
+<b>to start:</b></br>
+<code>gulp serve</code>
