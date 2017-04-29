@@ -7,7 +7,7 @@
 
   /** @ngInject */
   function MainController($scope, CartModel, ProductModel, $http, GetJson, $rootScope) {
-
+	console.log("test");
     $scope.typyNagrod = ["brak", "złoto", "proszek", "karta", "paczka"];
     $scope.typyKart = ["złota", "fioletowa", "pomarań", "szara"];
 
@@ -27,6 +27,20 @@
       $scope.productValue4 = 0;
       $scope.productValue5 = 0;
     }
+
+      var panes = $scope.panes = [];
+
+      $scope.select = function(pane) {
+        angular.forEach(panes, function(pane) {
+          pane.selected = false;
+        });
+        pane.selected = true;
+      }
+
+      this.addPane = function(pane) {
+        if (panes.length == 0) $scope.select(pane);
+        panes.push(pane);
+      }
 
     var cart = new CartModel();
     $scope.cart = cart;
@@ -75,7 +89,7 @@
         $scope.product = new ProductModel();
         reset();
         refreshBarChart();
-        //console.log(JSON.stringify($scope.cart, null, 2));
+        console.log(JSON.stringify($scope.cart, null, 2));
       });
     });
 

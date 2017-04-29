@@ -25,48 +25,71 @@
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+<div class="container" ng-controller="MainController as main">
+	<tabs>
+		<pane title="Basic Stats">
+			<div class="row stats tabTop">
+				<div class="col-md-6">
+					<h3>Statystyki</h3>
+					<div class="row">
+						<div class="col-md-6">
+							<p>Ilość aren: {{ cart.overAll() }} </p>
+							<p>Suma gold: {{ cart.overAllGold() }}</p>
+							<p>Suma dust: {{ cart.overAllDust() }}</p>
+							<p>Wygrane: {{ cart.overAllWins() }}</p>
+							<p>Zagrane: {{ cart.overAllGames() }}</p>
+							<p>Przegrane: {{ cart.overAllLostGames() }}</p>
+						</div>
+						<div class="col-md-6">
+							<p>Srednia: {{ cart.overAllAvg() }}</p>
+							<p>zysk/strata: {{ cart.overAllWinLossRatio() }} G</p>
+							<p>Niesplacone: {{ cart.overAllBadGames() }}</p>
+							<p>zysk/strata grind: {{ cart.overAllGrind() }} G</p>
+							<p>Szacunkowy czas gry: {{ cart.overAllTimePlayed() }}</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 classes">
+					<h3>Klasy</h3>
+					<div class="row">
+						<div class="col-md-6">
+							<p><img src="img/hunter.png" alt="hunter" width="256" height="256">Hunter: {{ cart.overAllClasses(0) }} </p>
+							<p><img src="img/warlock.png" alt="warlock" width="256" height="256">Warlock: {{ cart.overAllClasses(1) }} </p>
+							<p><img src="img/warrior.png" alt="warrior" width="256" height="256">Warrior: {{ cart.overAllClasses(2) }} </p>
+							<p><img src="img/rogue.png" alt="rogue" width="256" height="256">Rogue: {{ cart.overAllClasses(3)}} </p>
+							<p><img src="img/druid.png" alt="druid" width="256" height="256">Druid: {{ cart.overAllClasses(4) }} </p>
+						</div>
+						<div class="col-md-6">
+							<p><img src="img/shaman.png" alt="shaman" width="256" height="256">Shaman: {{ cart.overAllClasses(5) }} </p>
+							<p><img src="img/mage.png" alt="mage" width="256" height="256">Mage: {{ cart.overAllClasses(6)}} </p>
+							<p><img src="img/paladin.png" alt="paladin" width="256" height="256">Paladin: {{ cart.overAllClasses(7) }} </p>
+							<p><img src="img/priest.png" alt="priest" width="256" height="256">Priest: {{ cart.overAllClasses(8) }} </p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</pane>
+		<pane title="Class Chart">
+	        <div class="row tabTop" ng-controller="BarChartController as bar">
+		      <div class="col-md-6">
+		        <canvas id="base" class="chart-horizontal-bar" chart-data="data" chart-labels="labels"></canvas>
+		      </div>
+		    </div>
+	    </pane>
+	    <pane title="Games Chart">
+		    <div class="row tabTop" ng-controller="LineChartController as bar">
+		      <div class="col-md-6 col-md-offset-3">
+		      <canvas id="line" class="chart chart-line" chart-data="data"
+		      chart-labels="labels" chart-series="series" chart-options="options"
+		      chart-dataset-override="datasetOverride" chart-click="onClick">
+		      </canvas>
+		      </div>
+		    </div>
+	   	</pane>
+	   	<pane title="None">
+	   	</pane>
+	</tabs> 
 
-    <div class="container" ng-controller="MainController as main">
-      <div class="row stats">
-        <div class="col-md-6">
-          <h3>Statystyki</h3>
-          <div class="row">
-            <div class="col-md-6">
-              <p>Ilość aren: {{ cart.overAll() }} </p>
-              <p>Suma gold: {{ cart.overAllGold() }}</p>
-              <p>Suma dust: {{ cart.overAllDust() }}</p>
-              <p>Wygrane: {{ cart.overAllWins() }}</p>
-              <p>Zagrane: {{ cart.overAllGames() }}</p>
-              <p>Przegrane: {{ cart.overAllLostGames() }}</p>
-            </div>
-            <div class="col-md-6">
-              <p>Srednia: {{ cart.overAllAvg() }}</p>
-              <p>zysk/strata: {{ cart.overAllWinLossRatio() }} G</p>
-              <p>Niesplacone: {{ cart.overAllBadGames() }}</p>
-              <p>zysk/strata grind: {{ cart.overAllGrind() }} G</p>
-              <p>Szacunkowy czas gry: {{ cart.overAllTimePlayed() }}</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 classes">
-          <h3>Klasy</h3>
-          <div class="row">
-            <div class="col-md-6">
-              <p><img src="img/hunter.png" alt="hunter" width="256" height="256">Hunter: {{ cart.overAllClasses(0) }} </p>
-              <p><img src="img/warlock.png" alt="warlock" width="256" height="256">Warlock: {{ cart.overAllClasses(1) }} </p>
-              <p><img src="img/warrior.png" alt="warrior" width="256" height="256">Warrior: {{ cart.overAllClasses(2) }} </p>
-              <p><img src="img/rogue.png" alt="rogue" width="256" height="256">Rogue: {{ cart.overAllClasses(3)}} </p>
-              <p><img src="img/druid.png" alt="druid" width="256" height="256">Druid: {{ cart.overAllClasses(4) }} </p>
-            </div>
-            <div class="col-md-6">
-              <p><img src="img/shaman.png" alt="shaman" width="256" height="256">Shaman: {{ cart.overAllClasses(5) }} </p>
-              <p><img src="img/mage.png" alt="mage" width="256" height="256">Mage: {{ cart.overAllClasses(6)}} </p>
-              <p><img src="img/paladin.png" alt="paladin" width="256" height="256">Paladin: {{ cart.overAllClasses(7) }} </p>
-              <p><img src="img/priest.png" alt="priest" width="256" height="256">Priest: {{ cart.overAllClasses(8) }} </p>
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="row">
         <div class="col-md-12">
           <div class="row input__container">
@@ -298,24 +321,6 @@
       </div>
     </div>
 
-  <div class="container" ng-controller="BarChartController as bar">
-    <div class="row">
-      <div class="col-md-6">
-        <canvas id="base" class="chart-horizontal-bar" chart-data="data" chart-labels="labels"></canvas>
-      </div>
-    </div>
-  </div>
-  <div class="container" ng-controller="LineChartController as bar">
-    <div class="row">
-      <div class="col-md-12">
-      <canvas id="line" class="chart chart-line" chart-data="data"
-      chart-labels="labels" chart-series="series" chart-options="options"
-      chart-dataset-override="datasetOverride" chart-click="onClick">
-      </canvas>
-      </div>
-    </div>
-  </div>
-
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="../bower_components/jquery/dist/jquery.js"></script>
@@ -330,6 +335,7 @@
 
     <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
     <!-- inject:js -->
+    <script src="app/main/tab.directive.js"></script>
     <script src="app/index.module.js"></script>
     <script src="app/main/product.model.js"></script>
     <script src="app/main/main.controller.js"></script>
