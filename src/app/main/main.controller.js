@@ -10,37 +10,9 @@
 	console.log("test");
     $scope.typyNagrod = ["brak", "złoto", "proszek", "karta", "paczka"];
     $scope.typyKart = ["złota", "fioletowa", "pomarań", "szara"];
-
-    var reset = function() {
-      $scope.productChar = "";
-      $scope.productWins = 0;
-      $scope.productScore = 0;
-      $scope.productPack1 = "";
-      $scope.productPack2 = "";
-      $scope.productPack3 = "";
-      $scope.productPack4 = "";
-      $scope.productPack5 = "";
-      $scope.productScore = "";
-      $scope.productValue1 = 0;
-      $scope.productValue2 = 0;
-      $scope.productValue3 = 0;
-      $scope.productValue4 = 0;
-      $scope.productValue5 = 0;
-    }
-
-      var panes = $scope.panes = [];
-
-      $scope.select = function(pane) {
-        angular.forEach(panes, function(pane) {
-          pane.selected = false;
-        });
-        pane.selected = true;
-      }
-
-      this.addPane = function(pane) {
-        if (panes.length == 0) $scope.select(pane);
-        panes.push(pane);
-      }
+    $scope.testWinsArr = [{value: "", label: "None"},{value: 1, label: "1"},{value: 2, label: "2"},{value: 3, label: "3"},{value: 4, label: "4"},{value: 5, label: "5"},{value: 6, label: "6"},{value: 7, label: "7"},{value: 8, label: "8"},{value: 9, label: "9"},{value: 10, label: "10"},{value: 11, label: "11"},{value: 12, label: "12"}];
+    $scope.classArr = ["Hunter","Rogue","Warrior","Warlock","Druid","Mage","Shaman","Paladin","Priest"];
+    $scope.classArr2 = [{value: "", label: "None"},{value: "Hunter", label: "Hunter"},{value: "Rogue", label: "Rogue"},{value: "Warrior", label: "Warrior"},{value: "Warlock", label: "Warlock"},{value: "Druid", label: "Druid"},{value: "Mage", label: "Mage"},{value: "Shaman", label: "Shaman"},{value: "Paladin", label: "Paladin"},{value: "Priest", label: "Priest"}];
 
     var cart = new CartModel();
     $scope.cart = cart;
@@ -61,16 +33,23 @@
       $scope.product.setScore($scope.productScore);
       $scope.product.setTime(moment().format('MMMM Do YYYY'));//, h:mm:ss a'));
 
-
       $scope.cart.addProduct($scope.product);
 
-      console.log(JSON.stringify($scope.cart, null, 2));
+      //console.log(JSON.stringify($scope.cart, null, 2));
 
       $scope.product = new ProductModel();
-      reset();
       refreshBarChart();
+      $scope.myForm.$setPristine();
+      $scope.productChar = "";
+      $scope.productWins = "";
+      $scope.productPack1 = "";
+      $scope.productPack2 = "";
+      $scope.productPack3 = "";
+      $scope.productPack4 = "";
+      $scope.productPack5 = "";
+      $scope.productScore = "";
+    };
 
-    }
     var promiseAnswers = GetJson.getData();
 
     promiseAnswers.then(function(data){
@@ -87,7 +66,6 @@
         
         $scope.cart.addProduct($scope.product);
         $scope.product = new ProductModel();
-        reset();
         refreshBarChart();
         console.log(JSON.stringify($scope.cart, null, 2));
       });
@@ -105,7 +83,7 @@
 
     $scope.orderByMe = function(x) {
       if(x=="char") {
-        if(classSorted==true){
+        if(classSorted){
           $scope.myOrderBy = "-"+x;
           classSorted=false;
         } else {
@@ -114,7 +92,7 @@
         }
       }
       if(x=="wins"){
-        if(winsSorted==true){
+        if(winsSorted){
           $scope.myOrderBy = "-"+x;
           winsSorted=false;
         } else {
@@ -123,7 +101,7 @@
         }
       }
       if(x=="score"){
-        if(scoreSorted==true){
+        if(scoreSorted){
           $scope.myOrderBy = "-"+x;
           scoreSorted=false;
         } else {
@@ -141,8 +119,10 @@
         $scope.cart.overAllClasses(6), $scope.cart.overAllClasses(7),
         $scope.cart.overAllClasses(8)]
       ];
+      console.log(data);
       $rootScope.$broadcast("sendData", data);
       $rootScope.$broadcast("sendTime", cart.overAllTime());
     };
   }
+
 })();

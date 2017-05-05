@@ -3,16 +3,14 @@
 
   angular
     .module('cartProject')
-    .service('GetJson', GetJsonService);
+    .service('GetJson', GetJson);
 
-    function GetJsonService($http, $q) {
-     var deferred = $q.defer();
-     $http.get('baza.json').success(function(data) {
-        deferred.resolve(data);
-      });
+    function GetJson($http, $q) {
       return {
         getData:  function() {
-          return deferred.promise;
+          return $http.get('baza.json').then(function(response) {
+            return response.data;
+          });
         }
       };
     }

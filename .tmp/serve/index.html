@@ -90,30 +90,22 @@
 	   	</pane>
 	</tabs> 
 
+    <form name="myForm">
       <div class="row">
         <div class="col-md-12">
           <div class="row input__container">
             <div class="col-md-4 input__group">
               <div class="row">
                 <div class="col-md-4 input__class">
-                  <select required ng-model="productChar" class="table__input__class">
-                    <option value="" disabled selected hidden>class</option>
-                    <option value="Hunter">Hunter</option>
-                    <option value="Rogue">Rogue</option>
-                    <option value="Warrior">Warrior</option>
-                    <option value="Warlock">Warlock</option>
-                    <option value="Druid">Druid</option>
-                    <option value="Mage">Mage</option>
-                    <option value="Shaman">Shaman</option>
-                    <option value="Paladin">Paladin</option>
-                    <option value="Priest">Priest</option>
-                  </select>
+                <select required name="charClass" ng-model="productChar" class="table__input__class" ng-options="x for x in classArr">
+            		<option value="" disabled selected hidden>class</option>
+            	</select>
                 </div>
                 <div class="col-md-4 input__cell">
-                  <input class="form__wins" type="number" name="wins" placeholder="wins" ng-model="productWins"/>
+                  <input required class="form__wins" type="number" name="wins" placeholder="wins" ng-model="productWins"/>
                 </div>
                 <div class="col-md-4 input__cell">
-                  <select  required ng-model="productPack1" name="nagroda1">
+                  <select  required ng-model="productPack1" name="nagroda1a">
                     <option value="" disabled selected hidden>pack1</option>
                     <option ng-repeat="name in typyNagrod track by $index" value="{{$index}}">{{name}}</option>
                   </select>
@@ -123,19 +115,19 @@
             <div class="col-md-4 input__group">
               <div class="row">
                 <div class="col-md-4 input__cell">
-                  <select  required ng-model="productPack2" name="nagroda2">
+                  <select  required ng-model="productPack2" name="nagroda2a">
                     <option value="" disabled selected hidden>pack2</option>
                     <option ng-repeat="name in typyNagrod track by $index" value="{{$index}}">{{name}}</option>
                   </select>
                 </div>
                 <div class="col-md-4 input__cell">
-                  <select  required ng-model="productPack3" name="nagroda3">
+                  <select  required ng-model="productPack3" name="nagroda3a">
                     <option value="" disabled selected hidden>pack3</option>
                     <option ng-repeat="name in typyNagrod track by $index" value="{{$index}}">{{name}}</option>
                   </select>
                 </div>
                 <div class="col-md-4 input__cell">
-                  <select  required ng-model="productPack4" name="nagroda4">
+                  <select  required ng-model="productPack4" name="nagroda4a">
                     <option value="" disabled selected hidden>pack4</option>
                     <option ng-repeat="name in typyNagrod track by $index" value="{{$index}}">{{name}}</option>
                   </select>
@@ -145,16 +137,17 @@
             <div class="col-md-4 input__group">
               <div class="row">
                 <div class="col-md-4 input__cell">
-                  <select  required ng-model="productPack5" name="nagroda5">
+                  <select  required ng-model="productPack5" name="nagroda5a">
                     <option value="" disabled selected hidden>pack5</option>
                     <option ng-repeat="name in typyNagrod track by $index" value="{{$index}}">{{name}}</option>
                   </select> 
                 </div>
                 <div class="col-md-4 input__cell">
-                  <input type="text" class="form__wins" name="score" placeholder="HA score" ng-model="productScore"/>
+                  <input required type="text" class="form__wins" name="score" placeholder="HA score" ng-model="productScore"/>
                 </div>
                 <div class="col-md-4 input__cell">
-                  <input class="table__input__btn" type="submit" name="submit" value="Submit" ng-click="add()" >
+                  <input class="table__input__btn" type="submit" name="submit" value="Submit" ng-click="add()" ng-disabled="(myForm.charClass.$invalid || myForm.wins.$invalid || myForm.nagroda1a.$invalid|| myForm.nagroda2a.$invalid || myForm.nagroda3a.$invalid || myForm.nagroda4a.$invalid || myForm.nagroda5a.$invalid || myForm.score.$invalid) ? true : false">
+                  
                 </div>
               </div>
             </div>
@@ -231,6 +224,7 @@
           </div>
         </div>
       </div>
+    </form>
 
 
       <div class="col-md-12 main__filter">
@@ -244,36 +238,11 @@
         </div>
         <div class="row">
           <form>                                    <!--  formularz do wyszukiwania -->
-            <div class="col-md-2">                     
-              <select ng-model="testName">
-                <option value="">None</option>
-                <option value="Druid">Druid</option>
-                <option value="Hunter">Hunter</option>
-                <option value="Mage">Mage</option>
-                <option value="Paladin">Paladin</option>
-                <option value="Priest">Priest</option>
-                <option value="Rogue">Rogue</option>
-                <option value="Shaman">Shaman</option>
-                <option value="Warlock">Warlock</option>
-                <option value="Warrior">Warrior</option>
-              </select>
+            <div class="col-md-2"> 
+            	<select ng-model="testName" ng-options="x.value as x.label for x in classArr2"></select>                    
             </div>
             <div class="col-md-2">
-              <select ng-model="testWins">
-                <option value="">None</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-              </select>
+            	<select ng-model="testWins" ng-options="x.value as x.label for x in testWinsArr"></select>
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-2"></div>
