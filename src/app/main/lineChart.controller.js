@@ -33,9 +33,9 @@
     $scope.$on("sendTime", function(a, param) {
       $scope.data = [];
       $scope.data.push(occ(param));
-      console.log($scope.data);
+      //console.log($scope.data);
       $scope.labels = uniq(param);
-      console.log($scope.labels);
+      //console.log($scope.labels);
     });
 
     //$scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
