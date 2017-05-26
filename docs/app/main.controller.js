@@ -13,6 +13,8 @@
     $scope.classArr = ["Hunter","Rogue","Warrior","Warlock","Druid","Mage","Shaman","Paladin","Priest"];
     $scope.classArr2 = [{value: "", label: "None"},{value: "Hunter", label: "Hunter"},{value: "Rogue", label: "Rogue"},{value: "Warrior", label: "Warrior"},{value: "Warlock", label: "Warlock"},{value: "Druid", label: "Druid"},{value: "Mage", label: "Mage"},{value: "Shaman", label: "Shaman"},{value: "Paladin", label: "Paladin"},{value: "Priest", label: "Priest"}];
 
+    $scope.ch = false;
+
     var cart = new CartModel();
     $scope.cart = cart;
 
@@ -52,7 +54,6 @@
       $scope.productPack5 = "";
       $scope.productScore = "";
 
-
      /* db.allDocs({
         include_docs: true,
         attachments: true
@@ -89,6 +90,8 @@
     };
 
     $scope.DBclear = function(){
+      $scope.ch = true;
+      console.log("");
       db.destroy()
       db = new PouchDB('HSstats');
       db.info().then(function (info) {
