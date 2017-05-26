@@ -1,1 +1,282 @@
-<!doctype html><html ng-app="cartProject"> <head> <meta charset="utf-8"> <title>Hearthstone Arena Stats App</title> <meta name="description" content=""> <meta name="viewport" content="width=device-width"> <link rel="stylesheet" href="libraries/angular-toastr.css"/> <link rel="stylesheet" href="libraries/animate.css"/> <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/> <link rel="stylesheet" href="app/index.css"> <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> <script src="libraries/jquery.js"></script> <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> </head> <body ng-controller="MainController as main"> <div class="container"> <tabs> <pane title="Basic Stats"> <div class="row "> <div class="col-md-6 col-xs-6"> <h3 class="text-center">Stats</h3> <div class="row"> <div class="col-md-6"> <table class="table"> <tr><td>Arenas amount:</td><td>{{cart.overAll()}}</td></tr><tr><td>Sum of gold:</td><td>{{cart.overAllGold()}}</td></tr><tr><td>Sum of dust:</td><td>{{cart.overAllDust()}}</td></tr><tr><td>Wins:</td><td>{{cart.overAllWins()}}</td></tr><tr><td>Played:</td><td>{{cart.overAllGames()}}</td></tr><tr><td>Lost:</td><td>{{cart.overAllLostGames()}}</td></tr></table> </div><div class="col-md-6"> <table class="table"> <tr><td>Average:</td><td>{{cart.overAllAvg()}}</td></tr><tr><td>Gain/Loss:</td><td>{{cart.overAllWinLossRatio()}}G</td></tr><tr><td>Lossy games:</td><td>{{cart.overAllBadGames()}}</td></tr><tr><td>Gain/Loss grind:</td><td>{{cart.overAllGrind()}}G</td></tr><tr><td>Estimated game time:</td><td>{{cart.overAllTimePlayed()}}h</td></tr></table> </div></div></div><div class="col-md-6 col-xs-6 classes"> <h3 class="text-center">Characters</h3> <div class="row"> <div class="col-md-6"> <table class="table"> <tr><td><img src="img/hunter.png" alt="hunter">Hunter:</td><td>{{cart.overAllClasses(0)}}</td></tr><tr><td><img src="img/warlock.png" alt="warlock">Warlock:</td><td>{{cart.overAllClasses(1)}}</td></tr><tr><td><img src="img/warrior.png" alt="warrior">Warrior:</td><td>{{cart.overAllClasses(2)}}</td></tr><tr><td><img src="img/rogue.png" alt="rogue">Rogue:</td><td>{{cart.overAllClasses(3)}}</td></tr><tr><td><img src="img/druid.png" alt="druid">Druid:</td><td>{{cart.overAllClasses(4)}}</td></tr></table> </div><div class="col-md-6"> <table class="table"> <tr><td><img src="img/shaman.png" alt="shaman">Shaman:</td><td>{{cart.overAllClasses(5)}}</td></tr><tr><td><img src="img/mage.png" alt="mage">Mage:</td><td>{{cart.overAllClasses(6)}}</td></tr><tr><td><img src="img/paladin.png" alt="paladin">Paladin:</td><td>{{cart.overAllClasses(7)}}</td></tr><tr><td><img src="img/priest.png" alt="priest">Priest:</td><td>{{cart.overAllClasses(8)}}</td></tr></table> </div></div></div></div></pane> <pane title="Class Chart"> <div class="row" ng-controller="BarChartController as bar"> <div class="col-md-6"> <canvas id="base" class="chart-horizontal-bar" chart-data="data" chart-labels="labels"></canvas> </div></div></pane> <pane title="Games Chart"> <div class="row" ng-controller="LineChartController as bar"> <div class="col-md-6"> <canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options" chart-dataset-override="datasetOverride" chart-click="onClick"> </canvas> </div></div></pane> <pane title="None"> </pane> <hr class="divider"> </tabs> </div><div class="container"> <form name="myForm"> <div class="row"> <div class="col-md-4"> <div class="row"> <div class="col-md-4 input__cell"> <select required name="charClass" ng-model="productChar" class="form-control" ng-options="x for x in classArr"> <option value="" disabled selected hidden>class</option> </select> </div><div class="col-md-4 input__cell"> <input required class="form-control" type="number" name="wins" placeholder="wins" ng-model="productWins"/> </div><div class="col-md-4 input__cell"> <select required ng-model="productPack1" name="nagroda1a" class="form-control"> <option value="" disabled selected hidden>pack1</option> <option ng-repeat="name in typyNagrod track by $index" value="{{$index}}">{{name}}</option> </select> <div ng-show="productPack1==1 || productPack1==2"> <input type="number" name="amount1" ng-model="productValue1" placeholder="amount" class="form-control input__cell--bottom"/> </div><div ng-show="productPack1==3"> <select required name="nagroda1" ng-model="productValue1" class="form-control input__cell--bottom"> <option value="" disabled selected hidden>card colour</option> <option ng-repeat="name in typyKart track by $index" string-to-number value="{{$index}}">{{name}}</option> </select> </div></div></div></div><div class="col-md-4"> <div class="row"> <div class="col-md-4 input__cell"> <select required ng-model="productPack2" name="nagroda2a" class="form-control"> <option value="" disabled selected hidden>pack2</option> <option ng-repeat="name in typyNagrod track by $index" value="{{$index}}">{{name}}</option> </select> <div ng-show="productPack2==1 || productPack2==2"> <input type="number" name="amount2" ng-model="productValue2" placeholder="amount" class="form-control input__cell--bottom"/> </div><div ng-show="productPack2==3"> <select required name="nagroda2" ng-model="productValue2" class="form-control input__cell--bottom"> <option value="" disabled selected hidden>card colour</option> <option ng-repeat="name in typyKart track by $index" value="{{$index}}">{{name}}</option> </select> </div></div><div class="col-md-4 input__cell"> <select required ng-model="productPack3" name="nagroda3a" class="form-control"> <option value="" disabled selected hidden>pack3</option> <option ng-repeat="name in typyNagrod track by $index" value="{{$index}}">{{name}}</option> </select> <div ng-show="productPack3==1 || productPack3==2"> <input type="number" name="amount3" ng-model="productValue3" placeholder="amount" class="form-control input__cell--bottom"/> </div><div ng-show="productPack3==3" > <select required name="nagroda3" ng-model="productValue3" class="form-control input__cell--bottom"> <option value="" disabled selected hidden>card colour</option> <option ng-repeat="name in typyKart track by $index" value="{{$index}}">{{name}}</option> </select> </div></div><div class="col-md-4 input__cell"> <select required ng-model="productPack4" name="nagroda4a" class="form-control"> <option value="" disabled selected hidden>pack4</option> <option ng-repeat="name in typyNagrod track by $index" value="{{$index}}">{{name}}</option> </select> <div ng-show="productPack4==1 || productPack4==2" > <input type="number" name="amount4" ng-model="productValue4" placeholder="amount" class="form-control input__cell--bottom"/> </div><div ng-show="productPack4==3" > <select required name="nagroda4" ng-model="productValue4" class="form-control input__cell--bottom"> <option value="" disabled selected hidden>card colour</option> <option ng-repeat="name in typyKart track by $index" value="{{$index}}">{{name}}</option> </select> </div></div></div></div><div class="col-md-4"> <div class="row"> <div class="col-md-4 input__cell"> <select required ng-model="productPack5" name="nagroda5a" class="form-control"> <option value="" disabled selected hidden>pack5</option> <option ng-repeat="name in typyNagrod track by $index" value="{{$index}}">{{name}}</option> </select> <div ng-show="productPack5==1 || productPack5==2" > <input type="number" name="amount5" ng-model="productValue5" placeholder="amount" class="form-control input__cell--bottom"/> </div><div ng-show="productPack5==3" > <select required name="nagroda5" ng-model="productValue5" class="form-control input__cell--bottom"> <option value="" disabled selected hidden>card colour</option> <option ng-repeat="name in typyKart track by $index" value="{{$index}}">{{name}}</option> </select> </div></div><div class="col-md-4 input__cell"> <input required type="text" class="form-control" name="score" placeholder="HA score" ng-model="productScore"/> </div><div class="col-md-4 input__cell"> <button class="btn btn-primary" type="submit" name="submit" ng-click="add()" ng-disabled="(myForm.charClass.$invalid || myForm.wins.$invalid || myForm.nagroda1a.$invalid|| myForm.nagroda2a.$invalid || myForm.nagroda3a.$invalid || myForm.nagroda4a.$invalid || myForm.nagroda5a.$invalid || myForm.score.$invalid) ? true : false">Submit</button> </div></div></div></div></form> <hr class="divider"> </div><div class="container"> <div class="form"> <div class="row"> <div class="col-md-12"> <div class="col-md-2"> <p><span class="fa fa-filter" aria-hidden="true"></span> Filter by Class:</p><select ng-model="testName" ng-options="x.value as x.label for x in classArr2" class="form-control"></select> </div><div class="col-md-2"> <p><span class="fa fa-filter" aria-hidden="true"></span> Filter by Wins:</p><select ng-model="testWins" ng-options="x.value as x.label for x in testWinsArr" class="form-control"></select> </div><div class="col-md-2"> <p><span class="fa fa-filter" aria-hidden="true"></span> Filter by HA score:</p><input type="text" ng-model="testScore" placeholder="HA score" class="form-control"> </div></div></div><hr class="divider"> </div><div class="row"> <div class="col-md-12"> <table class="table table-hover aTable"> <thead class="aThead"> <tr class="aTr"> <th ng-click="orderByMe('char')">CLASS <span class="fa fa-sort" aria-hidden="true"></span></th> <th ng-click="orderByMe('wins')">WINS <span class="fa fa-sort" aria-hidden="true"></span></th> <th>PACK1</th> <th>PACK2</th> <th>PACK3</th> <th>PACK4</th> <th>PACK5</th> <th ng-click="orderByMe('score')">HA SCORE <span class="fa fa-sort" aria-hidden="true"></span></th> <th>btn</th> </tr></thead> <tbody class="aTbody"> <tr ng-repeat="product in cart.listOfProducts | filter:{char: testName, wins: testWins, score: testScore}| orderBy:myOrderBy track by $index " class="aTr"> <td>{{product.char}}</td><td>{{product.wins}}</td><td>{{product.value1}}{{product.display1}}</td><td>{{product.value2}}{{product.display2}}</td><td>{{product.value3}}{{product.display3}}</td><td>{{product.value4}}{{product.display4}}</td><td>{{product.value5}}{{product.display5}}</td><td>{{product.score}}</td><td> <button class="btn btn-danger" ng-click="removeElement(cart.listOfProducts.indexOf(product))">X</button> </td></tr></tbody> </table> </div></div></div><script src="libraries/malarkey.min.js"></script> <script src="libraries/angular.js"></script> <script src="libraries/angular-toastr.tpls.js"></script> <script src="libraries/moment.js"></script> <script src="libraries/Chart.js"></script> <script src="libraries/angular-chart.js"></script> <script src="libraries/pouchdb.js"></script> <script src="app/tab.directive.js"></script> <script src="app/index.module.js"></script> <script src="app/product.model.js"></script> <script src="app/main.controller.js"></script> <script src="app/lineChart.controller.js"></script> <script src="app/getJsonService.js"></script> <script src="app/cart.model.js"></script> <script src="app/barChart.controller.js"></script> <script src="app/index.run.js"></script> <script src="app/index.constants.js"></script> <script src="app/index.config.js"></script> </body></html>
+<!doctype html>
+<html ng-app="cartProject">
+  <head>
+    <meta charset="utf-8">
+     <title>Hearthstone Arena Stats App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="libraries/angular-toastr.css" />
+    <link rel="stylesheet" href="libraries/animate.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="app/index.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="libraries/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+  <body ng-controller="MainController as main">
+    <div class="container">
+    	<tabs>
+    		<pane title="Basic Stats">
+    			<div class="row ">
+    				<div class="col-md-6 col-xs-6">
+    					<h3 class="text-center">Stats</h3>
+    					<div class="row">
+    						<div class="col-md-6">
+                  <table class="table">
+                    <tr><td>Arenas amount:</td><td>{{ cart.overAll() }}</td></tr>
+                    <tr><td>Sum of gold:</td><td>{{ cart.overAllGold() }}</td></tr>
+                    <tr><td>Sum of dust:</td><td>{{ cart.overAllDust() }}</td></tr>
+                    <tr><td>Wins:</td><td>{{ cart.overAllWins() }}</td></tr>
+                    <tr><td>Played:</td><td>{{ cart.overAllGames() }}</td></tr>
+                    <tr><td>Lost:</td><td>{{ cart.overAllLostGames() }}</td></tr>
+                  </table>
+    						</div>
+    						<div class="col-md-6">
+                <table class="table">
+                    <tr><td>Average:</td><td>{{ cart.overAllAvg() }}</td></tr>
+                    <tr><td>Gain/Loss:</td><td>{{ cart.overAllWinLossRatio() }} G</td></tr>
+                    <tr><td>Lossy games:</td><td>{{ cart.overAllBadGames() }}</td></tr>
+                    <tr><td>Gain/Loss grind:</td><td>{{ cart.overAllGrind() }} G</td></tr>
+                    <tr><td>Estimated game time:</td><td>{{ cart.overAllTimePlayed() }} h</td></tr>
+                  </table>
+    						</div>
+    					</div>
+    				</div>
+    				<div class="col-md-6 col-xs-6 classes">
+    					<h3 class="text-center">Characters</h3>
+    					<div class="row">
+    						<div class="col-md-6">
+                  <table class="table">
+      							<tr><td><img src="img/hunter.png" alt="hunter">Hunter:</td><td> {{ cart.overAllClasses(0) }} </td></tr>
+      							<tr><td><img src="img/warlock.png" alt="warlock">Warlock:</td><td> {{ cart.overAllClasses(1) }} </td></tr>
+      							<tr><td><img src="img/warrior.png" alt="warrior">Warrior:</td><td> {{ cart.overAllClasses(2) }} </td></tr>
+      							<tr><td><img src="img/rogue.png" alt="rogue">Rogue:</td><td> {{ cart.overAllClasses(3)}} </td></tr>
+      							<tr><td><img src="img/druid.png" alt="druid">Druid:</td><td> {{ cart.overAllClasses(4) }} </td></tr>
+                  </table>
+    						</div>
+    						<div class="col-md-6">
+                  <table class="table">
+      							<tr><td><img src="img/shaman.png" alt="shaman">Shaman:</td><td> {{ cart.overAllClasses(5) }} </td></tr>
+      							<tr><td><img src="img/mage.png" alt="mage">Mage:</td><td> {{ cart.overAllClasses(6)}} </td></tr>
+      							<tr><td><img src="img/paladin.png" alt="paladin">Paladin:</td><td> {{ cart.overAllClasses(7) }} </td></tr>
+      							<tr><td><img src="img/priest.png" alt="priest">Priest:</td><td> {{ cart.overAllClasses(8) }} </td></tr>
+                  </table>
+    						</div>
+    					</div>
+    				</div>
+    			</div>
+    		</pane>
+    		<pane title="Class Chart">
+          <div class="row" ng-controller="BarChartController as bar">
+    	      <div class="col-md-6">
+    	        <canvas id="base" class="chart-horizontal-bar" chart-data="data" chart-labels="labels"></canvas>
+    	      </div>
+    	    </div>
+        </pane>
+    	    <pane title="Games Chart">
+    		    <div class="row" ng-controller="LineChartController as bar">
+    		      <div class="col-md-6">
+    		      <canvas id="line" class="chart chart-line" chart-data="data"
+    		      chart-labels="labels" chart-series="series" chart-options="options"
+    		      chart-dataset-override="datasetOverride" chart-click="onClick">
+    		      </canvas>
+    		      </div>
+    		    </div>
+    	   	</pane>
+    	   	<pane title="None">
+            <!-- <button ng-click="DBclear()">clear DB</button>  -->
+    	   	</pane>
+          <hr class="divider">
+    	</tabs> 
+    </div>
+
+    <div class="container">
+      <form name="myForm">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-4 input__cell">
+                <select required name="charClass" ng-model="productChar" class="form-control" ng-options="x for x in classArr">
+              		<option value="" disabled selected hidden>class</option>
+              	</select>
+              </div>
+              <div class="col-md-4 input__cell">
+                <input required class="form-control" type="number" name="wins" placeholder="wins" ng-model="productWins"/>
+              </div>
+              <div class="col-md-4 input__cell">
+                <select required ng-model="productPack1" name="nagroda1a" class="form-control">
+                  <option value="" disabled selected hidden>pack1</option>
+                  <option ng-repeat="name in typyNagrod track by $index" value="{{$index}}">{{name}}</option>
+                </select>
+                <div ng-show="productPack1==1 || productPack1==2"> 
+                  <input type="number" name="amount1" ng-model="productValue1" placeholder="amount" class="form-control input__cell--bottom"/>
+                </div>
+                <div ng-show="productPack1==3">
+                  <select required name="nagroda1" ng-model="productValue1" class="form-control input__cell--bottom">
+                    <option value="" disabled selected hidden>card colour</option>
+                    <option ng-repeat="name in typyKart track by $index" string-to-number value="{{$index}}">{{name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-4 input__cell">
+                <select  required ng-model="productPack2" name="nagroda2a" class="form-control">
+                  <option value="" disabled selected hidden>pack2</option>
+                  <option ng-repeat="name in typyNagrod track by $index" value="{{$index}}">{{name}}</option>
+                </select>
+                <div ng-show="productPack2==1 || productPack2==2"> 
+                  <input type="number" name="amount2" ng-model="productValue2" placeholder="amount" class="form-control input__cell--bottom"/>
+                </div>
+                <div ng-show="productPack2==3">
+                  <select required name="nagroda2" ng-model="productValue2" class="form-control input__cell--bottom">
+                    <option value="" disabled selected hidden>card colour</option>
+                    <option ng-repeat="name in typyKart track by $index" value="{{$index}}">{{name}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4 input__cell">
+                <select  required ng-model="productPack3" name="nagroda3a" class="form-control">
+                  <option value="" disabled selected hidden>pack3</option>
+                  <option ng-repeat="name in typyNagrod track by $index" value="{{$index}}">{{name}}</option>
+                </select>
+                <div ng-show="productPack3==1 || productPack3==2"> 
+                  <input type="number" name="amount3" ng-model="productValue3" placeholder="amount" class="form-control input__cell--bottom"/>
+                </div>
+                <div ng-show="productPack3==3" >
+                  <select required name="nagroda3" ng-model="productValue3" class="form-control input__cell--bottom">
+                    <option value="" disabled selected hidden>card colour</option>
+                    <option ng-repeat="name in typyKart track by $index" value="{{$index}}">{{name}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4 input__cell">
+                <select  required ng-model="productPack4" name="nagroda4a" class="form-control">
+                  <option value="" disabled selected hidden>pack4</option>
+                  <option ng-repeat="name in typyNagrod track by $index" value="{{$index}}">{{name}}</option>
+                </select>
+                <div ng-show="productPack4==1 || productPack4==2" > 
+                  <input type="number" name="amount4" ng-model="productValue4" placeholder="amount" class="form-control input__cell--bottom"/>
+                </div>
+                <div ng-show="productPack4==3" >
+                  <select required name="nagroda4" ng-model="productValue4" class="form-control input__cell--bottom">
+                    <option value="" disabled selected hidden>card colour</option>
+                    <option ng-repeat="name in typyKart track by $index" value="{{$index}}">{{name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-4 input__cell">
+                <select  required ng-model="productPack5" name="nagroda5a" class="form-control">
+                  <option value="" disabled selected hidden>pack5</option>
+                  <option ng-repeat="name in typyNagrod track by $index" value="{{$index}}">{{name}}</option>
+                </select> 
+                <div ng-show="productPack5==1 || productPack5==2" > 
+                  <input type="number" name="amount5" ng-model="productValue5" placeholder="amount" class="form-control input__cell--bottom"/>
+                </div> 
+                <div ng-show="productPack5==3" >
+                  <select required name="nagroda5" ng-model="productValue5" class="form-control input__cell--bottom">
+                    <option value="" disabled selected hidden>card colour</option>
+                    <option ng-repeat="name in typyKart track by $index" value="{{$index}}">{{name}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4 input__cell">
+                <input required type="text" class="form-control" name="score" placeholder="HA score" ng-model="productScore"/>
+              </div>
+              <div class="col-md-4 input__cell">
+                <button class="btn btn-primary" type="submit" name="submit" ng-click="add()" ng-disabled="(myForm.charClass.$invalid || myForm.wins.$invalid || myForm.nagroda1a.$invalid|| myForm.nagroda2a.$invalid || myForm.nagroda3a.$invalid || myForm.nagroda4a.$invalid || myForm.nagroda5a.$invalid || myForm.score.$invalid) ? true : false">Submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <hr class="divider">
+    </div>
+
+
+    <div class="container">
+      <div class="form">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="col-md-2">
+              <p><span class="fa fa-filter" aria-hidden="true"></span> Filter by Class:</p>
+              <select ng-model="testName" ng-options="x.value as x.label for x in classArr2" class="form-control"></select>
+            </div>
+            <div class="col-md-2">
+              <p><span class="fa fa-filter" aria-hidden="true"></span> Filter by Wins:</p>
+              <select ng-model="testWins" ng-options="x.value as x.label for x in testWinsArr" class="form-control"></select>
+            </div>
+            <div class="col-md-2">
+              <p><span class="fa fa-filter" aria-hidden="true"></span> Filter by HA score:</p>
+              <input type="text" ng-model="testScore" placeholder="HA score" class="form-control">
+            </div>
+          </div> 
+        </div>
+        <hr class="divider">
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table table-hover aTable">
+            <thead class="aThead">
+              <tr class="aTr">
+                <th ng-click="orderByMe('char')">CLASS <span class="fa fa-sort" aria-hidden="true"></span></th>
+                <th ng-click="orderByMe('wins')">WINS <span class="fa fa-sort" aria-hidden="true"></span></th>
+                <th>PACK1</th>
+                <th>PACK2</th>
+                <th>PACK3</th>
+                <th>PACK4</th>
+                <th>PACK5</th>
+                <th ng-click="orderByMe('score')">HA SCORE <span class="fa fa-sort" aria-hidden="true"></span></th>
+                <th>btn</th>
+              </tr>
+            </thead>
+            <tbody class="aTbody"> 
+              <tr ng-repeat="product in cart.listOfProducts | filter: { char: testName, wins: testWins, score: testScore} | orderBy:myOrderBy track by $index " class="aTr">
+                <td>{{product.char}}</td>
+                <td>{{product.wins}}</td>
+                <td>{{product.value1}}{{product.display1}}</td>
+                <td>{{product.value2}}{{product.display2}}</td>
+                <td>{{product.value3}}{{product.display3}}</td>
+                <td>{{product.value4}}{{product.display4}}</td>
+                <td>{{product.value5}}{{product.display5}}</td>
+                <td>{{product.score}}</td>
+                <td>
+                  <button class="btn btn-danger" ng-click="removeElement(cart.listOfProducts.indexOf(product))">X</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script src="libraries/malarkey.min.js"></script>
+    <script src="libraries/angular.js"></script>
+    <script src="libraries/angular-toastr.tpls.js"></script>
+    <script src="libraries/moment.js"></script>
+    <script src="libraries/Chart.js"></script>
+    <script src="libraries/angular-chart.js"></script>
+    <script src="libraries/pouchdb.js"></script>
+
+
+    <script src="app/tab.directive.js"></script>
+    <script src="app/index.module.js"></script>
+    <script src="app/product.model.js"></script>
+    <script src="app/main.controller.js"></script>
+    <script src="app/lineChart.controller.js"></script>
+    <script src="app/getJsonService.js"></script>
+    <script src="app/cart.model.js"></script>
+    <script src="app/barChart.controller.js"></script>
+    <script src="app/index.run.js"></script>
+    <script src="app/index.constants.js"></script>
+    <script src="app/index.config.js"></script>
+
+  </body>
+</html>
